@@ -74,9 +74,6 @@ export class AuthService {
         _id: loginSuccess?._id,
         email: loginSuccess?.email,
         name: type == "user" ? loginSuccess?.companyName : loginSuccess?.name,
-        accountName: type == "user" ? loginSuccess?.accountName : "",
-        userId: type == "outlet" ? loginSuccess?.userId :"",
-        userAccountName:type == "outlet" ? userAccountName :"",
         accessToken: accessToken,
       };
 
