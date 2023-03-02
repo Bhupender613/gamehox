@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose from "mongoose";
-import { Industry } from "../../admin/entities/industry.entity";
+
 
 export type UserDocument = User & Document;
 @Schema({
@@ -38,8 +38,6 @@ export class User {
   @Prop()
   contactPerson: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Industry.name })
-  industryType: Industry;
 
   @Prop()
   outlets: number;

@@ -1,7 +1,9 @@
 export const SUCCESS = "Success";
 export const USER_ALREADY_EXIST = "Client with this email already exist.";
-export const INDUSTRY_ALREADY_EXIST =
-  "Industry with this name is already exist.";
+export const Tag_ALREADY_EXIST =
+  "Tag with this title is already exist.";
+  export const Game_ALREADY_EXIST =
+  "Game with this title is already exist.";
 export const IDENTIFICATION_ALREADY_EXIST =
   "This Identification name is already exist.";
 export const SOMETHING_WENT_WRONG = "Something went wrong.";

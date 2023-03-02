@@ -6,7 +6,7 @@ import { User, UserSchema } from "./entities/user.entity";
 import { JwtModule } from "@nestjs/jwt";
 import { AuthModule } from "../auth/auth.module";
 import { AdminModule } from "../admin/admin.module";
-import { Industry, IndustrySchema } from "../admin/entities/industry.entity";
+
 
 
 @Module({
