@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, ObjectId } from 'mongoose';
 import { Tag } from './tag.entity';
 
 export type GameDocument = Game & Document;
@@ -51,8 +51,8 @@ export class Game {
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Tag.name })
     SecondaryTag: Tag;
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Tag.name })
-    tag: Tag;
+    @Prop({ type:[mongoose.Schema.Types.ObjectId], ref: Tag.name })
+    tag: ObjectId[];
 
     @Prop()
     @ApiProperty()

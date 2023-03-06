@@ -287,6 +287,7 @@ async addGame(createGameDto: CreateGameDto) {
       }
       const allGames = await this.gameModel
         .find(options)
+        .populate([{ path: "tag", strictPopulate: false }])
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);

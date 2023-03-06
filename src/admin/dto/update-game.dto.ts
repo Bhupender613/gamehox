@@ -58,7 +58,7 @@ export class UpdateGameDto extends PartialType(CreateGameDto) {
     SecondaryTag: ObjectId;
 
     @ApiProperty()
-    tag: ObjectId;
+    tag:[];
 
     @ApiProperty()
     @IsString()

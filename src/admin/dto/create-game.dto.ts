@@ -56,7 +56,7 @@ export class CreateGameDto {
     SecondaryTag: ObjectId;
 
     @ApiProperty()
-    tag: ObjectId;
+    tag:[];
 
     @ApiProperty()
     @IsString()
