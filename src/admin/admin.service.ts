@@ -288,6 +288,8 @@ async addGame(createGameDto: CreateGameDto) {
       const allGames = await this.gameModel
         .find(options)
         .populate([{ path: "tag", strictPopulate: false }])
+        .populate([{ path: "primaryTag", strictPopulate: false }])
+        .populate([{ path: "SecondaryTag", strictPopulate: false }])
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
