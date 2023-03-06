@@ -23,6 +23,11 @@ export class UpdateTagDto extends PartialType(CreateTagDto) {
     @ApiProperty()
     @IsString()
     @IsNotEmpty()
+    tagImage: string;
+
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
     description: string;
 
     @ApiProperty()

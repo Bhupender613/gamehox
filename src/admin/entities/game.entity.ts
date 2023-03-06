@@ -57,6 +57,18 @@ export class Game {
     @Prop()
     @ApiProperty()
     featuredGame: string;
+
+    @Prop()
+    @ApiProperty()
+    gameThumb: string;
+
+    @Prop()
+    @ApiProperty()
+    gamePlayThumb: string;
+
+    @Prop()
+    @ApiProperty()
+    animatedGame: string;
     
     @Prop({ default: false })
     @ApiProperty()

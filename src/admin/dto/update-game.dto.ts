@@ -62,6 +62,18 @@ export class UpdateGameDto extends PartialType(CreateGameDto) {
 
     @ApiProperty()
     @IsString()
+    gameThumb: string;
+
+    @ApiProperty()
+    @IsString()
+    gamePlayThumb: string;
+
+    @ApiProperty()
+    @IsString()
+    animatedGame: string;
+
+    @ApiProperty()
+    @IsString()
     @IsNotEmpty()
     featuredGame: string;
     
