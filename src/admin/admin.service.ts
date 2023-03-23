@@ -39,6 +39,7 @@ import { UpdateGameDto } from "./dto/update-game.dto";
 import { CreateSettingDto } from "./dto/create-setting.dto";
 import { Setting, SettingDocument } from "./entities/setting.entity";
 import { UpdateSettingDto } from "./dto/update-setting.dto";
+const { convertArrayToCSV } = require("convert-array-to-csv");
 @Injectable()
 export class AdminService {
   /**
@@ -410,6 +411,50 @@ export class AdminService {
         allSettings,
         allSettingLength.length
       );
+    } catch (error) {
+      const { message, status } = error;
+      throw new HttpException(message, status);
+    }
+  }
+
+  // Download CSV for Tags
+  async downloadTags() {
+    try {
+      const allTags = await this.tagModel.find();
+
+      const data = allTags.map((item) => {
+        return {
+          Title: item?.title?.replace(/\n/g, " ") || "",
+          MetaTitle: item?.metaTitle?.replace(/\n/g, " ") || "",
+          MetaDescription: item?.metaDescription?.replace(/\n/g, " ") || "",
+          Description: item?.description?.replace(/\n/g, " ") || "",
+        };
+      });
+      const csvData = convertArrayToCSV(data);
+
+      return responseObj(HttpStatus.OK, SUCCESS, csvData);
+    } catch (error) {
+      const { message, status } = error;
+      throw new HttpException(message, status);
+    }
+  }
+
+  // Download CSV for Games
+  async downloadGames() {
+    try {
+      const allGames = await this.gameModel.find();
+
+      const data = allGames.map((item) => {
+        return {
+          Title: item?.title?.replace(/\n/g, " ") || "",
+          MetaTitle: item?.metaTitle?.replace(/\n/g, " ") || "",
+          MetaDescription: item?.metaDescription?.replace(/\n/g, " ") || "",
+          Description: item?.description?.replace(/\n/g, " ") || "",
+        };
+      });
+      const csvData = convertArrayToCSV(data);
+
+      return responseObj(HttpStatus.OK, SUCCESS, csvData);
     } catch (error) {
       const { message, status } = error;
       throw new HttpException(message, status);
