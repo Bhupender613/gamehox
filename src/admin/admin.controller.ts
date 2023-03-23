@@ -45,22 +45,24 @@ export class AdminController {
     return this.authService.login(adminLoginDto, "admin");
   }
 
+  // Download CSV for Tags
+  @Get("/download-tags-csv")
+  downloadTags() {
+    return this.adminService.downloadTags();
+  }
+
+  // Download CSV for Tags
+  @Get("/download-games-csv")
+  downloadGames() {
+    return this.adminService.downloadGames();
+  }
   //Get all Tags in Admin
   //@isPublicRoute()
   @Get("/get-tags")
   getTag(@Query() getTagType: GetTagType) {
     return this.adminService.getTag(getTagType);
   }
-  // Download CSV for Tags
-  @Get("/download-tags-csv")
-  downloadTags() {
-    return this.adminService.downloadTags();
-  }
-  // Download CSV for Tags
-  @Get("/download-games-csv")
-  downloadGames() {
-    return this.adminService.downloadGames();
-  }
+
   //Get all Settings in Admin
   //@isPublicRoute()
   @Get("/get-settings")
