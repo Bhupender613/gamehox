@@ -420,7 +420,7 @@ export class AdminService {
   // Download CSV for Tags
   async downloadTags() {
     try {
-      const allTags = await this.tagModel.find();
+      const allTags = await this.tagModel.find().lean().exec();
 
       const data = allTags.map((item) => {
         return {
@@ -442,7 +442,7 @@ export class AdminService {
   // Download CSV for Games
   async downloadGames() {
     try {
-      const allGames = await this.gameModel.find();
+      const allGames = await this.gameModel.find().lean().exec();
 
       const data = allGames.map((item) => {
         return {
