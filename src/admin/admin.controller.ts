@@ -17,7 +17,12 @@ import { UpdatePasswordDto } from "./dto/update-password.dto";
 import { isPublicRoute } from "../auth/roles/roles.decorator";
 import { ObjectId } from "mongoose";
 import { CreateTagDto } from "./dto/create-tag.dto";
-import { GetGameType, GetSettingType, GetTagType } from "./types";
+import {
+  DownloadTagCSV,
+  GetGameType,
+  GetSettingType,
+  GetTagType,
+} from "./types";
 import { UpdateTagDto } from "./dto/update-tag.dto";
 import { CreateGameDto } from "./dto/create-game.dto";
 import { UpdateGameDto } from "./dto/update-game.dto";
@@ -30,7 +35,11 @@ export class AdminController {
     private readonly adminService: AdminService,
     private readonly authService: AuthService
   ) {}
-
+  // Download CSV for Tags
+  @Get("/download-tags-csv")
+  downloadTags(@Query() downloadTagCSV: DownloadTagCSV) {
+    return this.adminService.downloadTags(downloadTagCSV);
+  }
   //Admin signup function
   @isPublicRoute()
   @Post("/register")
@@ -45,17 +54,6 @@ export class AdminController {
     return this.authService.login(adminLoginDto, "admin");
   }
 
-  // Download CSV for Tags
-  @Get("/download-tags-csv")
-  downloadTags() {
-    return this.adminService.downloadTags();
-  }
-
-  // Download CSV for Tags
-  @Get("/download-games-csv")
-  downloadGames() {
-    return this.adminService.downloadGames();
-  }
   //Get all Tags in Admin
   //@isPublicRoute()
   @Get("/get-tags")
@@ -165,5 +163,11 @@ export class AdminController {
     @Body() updateSettingDto: UpdateSettingDto
   ) {
     return this.adminService.settingUpdate(id, updateSettingDto);
+  }
+
+  // Download CSV for games
+  @Get("/download-games-csv")
+  downloadGames() {
+    return this.adminService.downloadGames();
   }
 }

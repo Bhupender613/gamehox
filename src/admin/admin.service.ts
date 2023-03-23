@@ -30,7 +30,12 @@ import {
   SUCCESS,
   Tag_ALREADY_EXIST,
 } from "../constant";
-import { GetGameType, GetSettingType, GetTagType } from "./types";
+import {
+  DownloadTagCSV,
+  GetGameType,
+  GetSettingType,
+  GetTagType,
+} from "./types";
 import { CreateTagDto } from "./dto/create-tag.dto";
 import { UpdateTagDto } from "./dto/update-tag.dto";
 import { CreateGameDto } from "./dto/create-game.dto";
@@ -418,9 +423,9 @@ export class AdminService {
   }
 
   // Download CSV for Tags
-  async downloadTags() {
+  async downloadTags(downloadTagCSV: DownloadTagCSV) {
     try {
-      const allTags = await this.tagModel.find().lean().exec();
+      const allTags = await this.tagModel.find(downloadTagCSV).lean();
 
       const data = allTags.map((item) => {
         return {
@@ -442,7 +447,7 @@ export class AdminService {
   // Download CSV for Games
   async downloadGames() {
     try {
-      const allGames = await this.gameModel.find().lean().exec();
+      const allGames = await this.gameModel.find({}).lean().exec();
 
       const data = allGames.map((item) => {
         return {

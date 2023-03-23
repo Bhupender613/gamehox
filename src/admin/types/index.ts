@@ -24,3 +24,8 @@ export class GetSettingType {
   @ApiProperty()
   limit?: number;
 }
+
+export class DownloadTagCSV {
+  @ApiProperty()
+  isDeleted: false;
+}
