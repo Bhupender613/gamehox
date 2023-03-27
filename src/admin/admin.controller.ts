@@ -35,11 +35,7 @@ export class AdminController {
     private readonly adminService: AdminService,
     private readonly authService: AuthService
   ) {}
-  // Download CSV for Tags
-  @Get("/download-tags-csv")
-  downloadTags(@Query() downloadTagCSV: DownloadTagCSV) {
-    return this.adminService.downloadTags(downloadTagCSV);
-  }
+
   //Admin signup function
   @isPublicRoute()
   @Post("/register")
@@ -166,8 +162,14 @@ export class AdminController {
   }
 
   // Download CSV for games
-  @Get("/download-games-csv")
+  @Post("/download-games-csv")
   downloadGames() {
     return this.adminService.downloadGames();
+  }
+
+  // Download CSV for Tags
+  @Post("/download-tags-csv")
+  downloadTags(@Query() downloadTagCSV: DownloadTagCSV) {
+    return this.adminService.downloadTags(downloadTagCSV);
   }
 }
