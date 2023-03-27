@@ -161,7 +161,7 @@ export class AdminController {
     return this.adminService.settingUpdate(id, updateSettingDto);
   }
 
-  // Download CSV for games
+  // Downssload CSV for games
   @Post("/download-games-csv")
   downloadGames() {
     return this.adminService.downloadGames();
