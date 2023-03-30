@@ -1,26 +1,53 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { isPublicRoute } from '../auth/roles/roles.decorator';
-import { CustomerService } from './customer.service';
-import { CreateCustomerDto } from './dto/create-customer.dto';
-import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { diskStorage } from 'multer';
-import { extname, parse } from 'path';
-import { readFileSync } from 'fs';
-import { ObjectId } from 'mongoose';
-import * as Papa from 'papaparse';
-import { fileURLToPath } from 'url';
-import { CsvFieldType, GetCustomerType } from './types';
-import { CUSTOMER_CSV } from '../constant';
-import { randomNumnberForCsv } from '../utils/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  UseInterceptors,
+  UploadedFile,
+  UploadedFiles,
+} from "@nestjs/common";
+import { AdminService } from "src/admin/admin.service";
+import { GetGameType, GetTagType } from "src/admin/types";
+import { isPublicRoute } from "src/auth/roles/roles.decorator";
+import { CustomerService } from "./customer.service";
 
-
-@Controller('customer')
+@Controller("customer")
 export class CustomerController {
   constructor(
     private readonly customerService: CustomerService,
-    ) {}
+    private readonly adminService: AdminService
+  ) {}
 
- // @isPublicRoute()
+  //Get all Tags
+  @isPublicRoute()
+  @Get("/get-tags")
+  getTag(@Query() getTagType: GetTagType) {
+    return this.adminService.getTag(getTagType);
+  }
 
+  //Get Single Tag
+  @isPublicRoute()
+  @Get("/get-tags/:id")
+  getSingleTag(@Param("id") id: any) {
+    return this.adminService.getSingleTag(id);
+  }
+
+  //Get all Games
+  @isPublicRoute()
+  @Get("/get-games")
+  getGame(@Query() getGameType: GetGameType) {
+    return this.adminService.getGame(getGameType);
+  }
+
+  //Get Single Game
+  @isPublicRoute()
+  @Get("/get-games/:id")
+  getSingleGame(@Param("id") id: any) {
+    return this.adminService.getSingleGame(id);
+  }
 }
