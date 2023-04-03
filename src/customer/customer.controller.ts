@@ -12,7 +12,7 @@ import {
   UploadedFiles,
 } from "@nestjs/common";
 import { AdminService } from "src/admin/admin.service";
-import { GetGameType, GetTagType } from "src/admin/types";
+import { GetGameType, GetSettingType, GetTagType } from "src/admin/types";
 import { isPublicRoute } from "src/auth/roles/roles.decorator";
 import { CustomerService } from "./customer.service";
 
@@ -49,5 +49,12 @@ export class CustomerController {
   @Get("/get-games/:id")
   getSingleGame(@Param("id") id: any) {
     return this.adminService.getSingleGame(id);
+  }
+
+  //Get all settings
+  @isPublicRoute()
+  @Get("/get-settings")
+  getSetting(@Query() getSettingType: GetSettingType) {
+    return this.adminService.getSetting(getSettingType);
   }
 }
