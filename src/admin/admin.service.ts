@@ -272,7 +272,7 @@ export class AdminService {
     }
   }
 
-  // Get Tags in admin
+  // Get games in admin
   async getGame(getGameType: GetGameType) {
     try {
       const { skip, limit, search } = getGameType;
@@ -305,6 +305,23 @@ export class AdminService {
         allGames,
         allGameLength.length
       );
+    } catch (error) {
+      const { message, status } = error;
+      throw new HttpException(message, status);
+    }
+  }
+
+  // Get games by tag
+  async getGameByTag(id: ObjectId) {
+    try {
+      const allGames = await this.gameModel
+        .find({ tag: { $in: [id] } })
+        //.populate([{ path: "tag", strictPopulate: false }])
+        // .populate([{ path: "primaryTag", strictPopulate: false }])
+        //.populate([{ path: "SecondaryTag", strictPopulate: false }])
+        .sort({ createdAt: -1 });
+
+      return responseGetObj(HttpStatus.OK, SUCCESS, allGames, 10);
     } catch (error) {
       const { message, status } = error;
       throw new HttpException(message, status);

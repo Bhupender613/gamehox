@@ -51,6 +51,13 @@ export class CustomerController {
     return this.adminService.getSingleGame(id);
   }
 
+  //Get game by tag
+  @isPublicRoute()
+  @Get("/get-games-by-tag/:id")
+  getGameByTag(@Param("id") id: any) {
+    return this.adminService.getGameByTag(id);
+  }
+
   //Get all settings
   @isPublicRoute()
   @Get("/get-settings")
