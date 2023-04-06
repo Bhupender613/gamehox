@@ -4,13 +4,15 @@ import { CustomerController } from "./customer.controller";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Customer, CustomerSchema } from "./entities/customer.entity";
 import { AdminModule } from "src/admin/admin.module";
+import { Tag, TagSchema } from "src/admin/entities/tag.entity";
+import { Game, GameSchema } from "src/admin/entities/game.entity";
+import { Setting, SettingSchema } from "src/admin/entities/setting.entity";
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Customer.name, schema: CustomerSchema },
-    ]),
-    AdminModule,
+    MongooseModule.forFeature([{ name: Tag.name, schema: TagSchema }]),
+    MongooseModule.forFeature([{ name: Game.name, schema: GameSchema }]),
+    MongooseModule.forFeature([{ name: Setting.name, schema: SettingSchema }]),
   ],
   controllers: [CustomerController],
   providers: [CustomerService],

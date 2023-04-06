@@ -15,53 +15,53 @@ import { AdminService } from "src/admin/admin.service";
 import { GetGameType, GetSettingType, GetTagType } from "src/admin/types";
 import { isPublicRoute } from "src/auth/roles/roles.decorator";
 import { CustomerService } from "./customer.service";
+import { AllTagType, GameByTag, GetAllGameType } from "./types";
 
 @Controller("customer")
 export class CustomerController {
   constructor(
-    private readonly customerService: CustomerService,
-    private readonly adminService: AdminService
+    private readonly customerService: CustomerService //  private readonly adminService: AdminService
   ) {}
 
   //Get all Tags
   @isPublicRoute()
   @Get("/get-tags")
-  getTag(@Query() getTagType: GetTagType) {
-    return this.adminService.getTag(getTagType);
+  getTag(@Query() allTagType: AllTagType) {
+    return this.customerService.getTag(allTagType);
   }
 
   //Get Single Tag
   @isPublicRoute()
   @Get("/get-tags/:id")
   getSingleTag(@Param("id") id: any) {
-    return this.adminService.getSingleTag(id);
+    return this.customerService.getSingleTag(id);
   }
 
   //Get all Games
   @isPublicRoute()
   @Get("/get-games")
-  getGame(@Query() getGameType: GetGameType) {
-    return this.adminService.getGame(getGameType);
+  getGame(@Query() getGameType: GetAllGameType) {
+    return this.customerService.getGame(getGameType);
   }
 
   //Get Single Game
   @isPublicRoute()
   @Get("/get-games/:id")
   getSingleGame(@Param("id") id: any) {
-    return this.adminService.getSingleGame(id);
+    return this.customerService.getSingleGame(id);
   }
 
   //Get game by tag
   @isPublicRoute()
   @Get("/get-games-by-tag/:id")
-  getGameByTag(@Param("id") id: any) {
-    return this.adminService.getGameByTag(id);
+  getGameByTag(@Query() gameByTag: GameByTag) {
+    return this.customerService.getGameByTag(gameByTag);
   }
 
   //Get all settings
   @isPublicRoute()
   @Get("/get-settings")
-  getSetting(@Query() getSettingType: GetSettingType) {
-    return this.adminService.getSetting(getSettingType);
+  getSetting() {
+    return this.customerService.getSetting();
   }
 }
