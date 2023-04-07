@@ -52,6 +52,7 @@ export class CustomerService {
         // .populate([{ path: "tag", strictPopulate: false }])
         // .populate([{ path: "primaryTag", strictPopulate: false }])
         // .populate([{ path: "SecondaryTag", strictPopulate: false }])
+        .select("title")
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
@@ -74,6 +75,7 @@ export class CustomerService {
       const { skip, limit, id } = gameByTag;
       const allGames = await this.gameModel
         .find({ tag: { $in: [id] } })
+        .select("title")
         //.populate([{ path: "tag", strictPopulate: false }])
         // .populate([{ path: "primaryTag", strictPopulate: false }])
         //.populate([{ path: "SecondaryTag", strictPopulate: false }])
@@ -119,6 +121,7 @@ export class CustomerService {
       }
       const allTags = await this.tagModel
         .find(options)
+        .select("title addToMenu")
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
