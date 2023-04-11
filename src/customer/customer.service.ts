@@ -52,7 +52,7 @@ export class CustomerService {
         // .populate([{ path: "tag", strictPopulate: false }])
         // .populate([{ path: "primaryTag", strictPopulate: false }])
         // .populate([{ path: "SecondaryTag", strictPopulate: false }])
-        .select("title")
+        .select("title primaryTag")
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
@@ -75,7 +75,7 @@ export class CustomerService {
       const { skip, limit, id } = gameByTag;
       const allGames = await this.gameModel
         .find({ tag: { $in: [id] } })
-        .select("title")
+        .select("title primaryTag")
         //.populate([{ path: "tag", strictPopulate: false }])
         // .populate([{ path: "primaryTag", strictPopulate: false }])
         //.populate([{ path: "SecondaryTag", strictPopulate: false }])

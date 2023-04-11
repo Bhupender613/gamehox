@@ -28,6 +28,10 @@ export class Tag {
   @ApiProperty()
   addToMenu: boolean;
 
+  @Prop({ default: false })
+  @ApiProperty()
+  addToHome: boolean;
+
   @Prop()
   @ApiProperty()
   tagImage: string;
