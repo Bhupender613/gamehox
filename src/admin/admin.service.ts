@@ -46,7 +46,7 @@ import { Setting, SettingDocument } from "./entities/setting.entity";
 import { UpdateSettingDto } from "./dto/update-setting.dto";
 import { CreateHomeTagdto } from "./dto/create-hometag.dto";
 import { UpdateHomeTagDto } from "./dto/update-hometag.dto";
-import { Hometag, HometagDocument } from "src/admin/entities/homeTag.entity";
+import { Taghome, TaghomeDocument } from "./entities/taghome";
 const { convertArrayToCSV } = require("convert-array-to-csv");
 @Injectable()
 export class AdminService {
@@ -63,8 +63,8 @@ export class AdminService {
     private gameModel: Model<GameDocument>,
     @InjectModel(Setting.name)
     private settingModel: Model<SettingDocument>,
-    @InjectModel(Hometag.name)
-    private hometagModel: Model<HometagDocument>
+    @InjectModel(Taghome.name)
+    private hometagModel: Model<TaghomeDocument>
   ) {}
 
   //////Admin Signup service ////

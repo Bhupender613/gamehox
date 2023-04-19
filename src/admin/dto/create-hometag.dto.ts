@@ -1,5 +1,4 @@
-import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateHomeTagdto {
   @ApiProperty()

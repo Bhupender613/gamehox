@@ -9,7 +9,7 @@ import { AuthModule } from "../auth/auth.module";
 import { Tag, TagSchema } from "./entities/tag.entity";
 import { Game, GameSchema } from "./entities/game.entity";
 import { Setting, SettingSchema } from "./entities/setting.entity";
-import { Hometag, HometagSchema } from "./entities/hometag.entity";
+import { Taghome, TaghomeSchema } from "./entities/taghome";
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { Hometag, HometagSchema } from "./entities/hometag.entity";
     MongooseModule.forFeature([{ name: Tag.name, schema: TagSchema }]),
     MongooseModule.forFeature([{ name: Game.name, schema: GameSchema }]),
     MongooseModule.forFeature([{ name: Setting.name, schema: SettingSchema }]),
-    MongooseModule.forFeature([{ name: Hometag.name, schema: HometagSchema }]),
+    MongooseModule.forFeature([{ name: Taghome.name, schema: TaghomeSchema }]),
     UsersModule,
     AuthModule,
   ],
