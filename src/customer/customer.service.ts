@@ -8,7 +8,7 @@ import {
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, ObjectId } from "mongoose";
 import { Game, GameDocument } from "src/admin/entities/game.entity";
-import { HomeTag, HomeTagDocument } from "src/admin/entities/homeTag.entity";
+import { Hometag, HometagDocument } from "src/admin/entities/homeTag.entity";
 import { Setting, SettingDocument } from "src/admin/entities/setting.entity";
 import { Tag, TagDocument } from "src/admin/entities/tag.entity";
 import { SUCCESS } from "src/constant";
@@ -28,8 +28,8 @@ export class CustomerService {
     private gameModel: Model<GameDocument>,
     @InjectModel(Setting.name)
     private settingModel: Model<SettingDocument>,
-    @InjectModel(HomeTag.name)
-    private hometagModel: Model<HomeTagDocument>
+    @InjectModel(Hometag.name)
+    private hometagModel: Model<HometagDocument>
   ) {}
 
   // Get games in admin
@@ -166,7 +166,7 @@ export class CustomerService {
     }
   }
 
-  ///// get settings///
+  ///// get home tags///
   async getHomeTags() {
     try {
       const allHometags = await this.hometagModel

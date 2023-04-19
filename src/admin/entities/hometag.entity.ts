@@ -3,12 +3,12 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsString } from "class-validator";
 import { Document } from "mongoose";
 
-export type HomeTagDocument = HomeTag & Document;
+export type HometagDocument = Hometag & Document;
 @Schema({
   timestamps: true,
   versionKey: false,
 })
-export class HomeTag {
+export class Hometag {
   @Prop()
   @ApiProperty()
   tags: [];
@@ -21,4 +21,4 @@ export class HomeTag {
   @ApiProperty()
   isBlocked: boolean;
 }
-export const HomeTagSchema = SchemaFactory.createForClass(HomeTag);
+export const HometagSchema = SchemaFactory.createForClass(Hometag);
