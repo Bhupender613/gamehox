@@ -46,7 +46,7 @@ import { Setting, SettingDocument } from "./entities/setting.entity";
 import { UpdateSettingDto } from "./dto/update-setting.dto";
 import { CreateHomeTagdto } from "./dto/create-hometag.dto";
 import { UpdateHomeTagDto } from "./dto/update-hometag.dto";
-import { Hometag, HometagDocument } from "./entities/homeTag.entity";
+import { Hometag, HometagDocument } from "src/admin/entities/homeTag.entity";
 const { convertArrayToCSV } = require("convert-array-to-csv");
 @Injectable()
 export class AdminService {
