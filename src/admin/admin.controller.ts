@@ -28,6 +28,8 @@ import { CreateGameDto } from "./dto/create-game.dto";
 import { UpdateGameDto } from "./dto/update-game.dto";
 import { CreateSettingDto } from "./dto/create-setting.dto";
 import { UpdateSettingDto } from "./dto/update-setting.dto";
+import { CreateHomeTagdto } from "./dto/create-hometag.dto";
+import { UpdateHomeTagDto } from "./dto/update-hometag.dto";
 
 @Controller({ path: "admin" })
 export class AdminController {
@@ -62,6 +64,11 @@ export class AdminController {
   @Get("/get-settings")
   getSetting(@Query() getSettingType: GetSettingType) {
     return this.adminService.getSetting(getSettingType);
+  }
+  //Get all home tags
+  @Get("/get-home-tags")
+  getHomeTags() {
+    return this.adminService.getHomeTags();
   }
 
   @Get("/get-tags/:id")
@@ -171,5 +178,20 @@ export class AdminController {
   @Post("/download-tags-csv")
   downloadTags(@Query() downloadTagCSV: DownloadTagCSV) {
     return this.adminService.downloadTags(downloadTagCSV);
+  }
+
+  // home page for Tags
+  @Post("/add-home-tags")
+  addHomeTags(@Body() createHomeTagdto: CreateHomeTagdto) {
+    return this.adminService.addHomeTags(createHomeTagdto);
+  }
+
+  // update home page in Admin
+  @Patch("/update-home-tag/:id")
+  updateHomeTags(
+    @Param("id") id: ObjectId,
+    @Body() updateHomeTagDto: UpdateHomeTagDto
+  ) {
+    return this.adminService.updateHomeTags(id, updateHomeTagDto);
   }
 }

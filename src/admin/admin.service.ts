@@ -44,6 +44,9 @@ import { UpdateGameDto } from "./dto/update-game.dto";
 import { CreateSettingDto } from "./dto/create-setting.dto";
 import { Setting, SettingDocument } from "./entities/setting.entity";
 import { UpdateSettingDto } from "./dto/update-setting.dto";
+import { HomeTag, HomeTagDocument } from "./entities/homeTag.entity";
+import { CreateHomeTagdto } from "./dto/create-hometag.dto";
+import { UpdateHomeTagDto } from "./dto/update-hometag.dto";
 const { convertArrayToCSV } = require("convert-array-to-csv");
 @Injectable()
 export class AdminService {
@@ -59,7 +62,9 @@ export class AdminService {
     @InjectModel(Game.name)
     private gameModel: Model<GameDocument>,
     @InjectModel(Setting.name)
-    private settingModel: Model<SettingDocument>
+    private settingModel: Model<SettingDocument>,
+    @InjectModel(HomeTag.name)
+    private hometagModel: Model<HomeTagDocument>
   ) {}
 
   //////Admin Signup service ////
@@ -477,6 +482,46 @@ export class AdminService {
       const csvData = convertArrayToCSV(data);
 
       return responseObj(HttpStatus.OK, SUCCESS, csvData);
+    } catch (error) {
+      const { message, status } = error;
+      throw new HttpException(message, status);
+    }
+  }
+
+  // Add Tag in admin
+  async addHomeTags(createHomeTagdto: CreateHomeTagdto) {
+    try {
+      const addTag = await new this.hometagModel(createHomeTagdto).save();
+      return responseObj(HttpStatus.OK, SUCCESS, addTag);
+    } catch (error) {
+      const { message, status } = error;
+      throw new HttpException(message, status);
+    }
+  }
+
+  // Update  HomeTags in the Admin
+  async updateHomeTags(id: ObjectId, updateHomeTagDto: UpdateHomeTagDto) {
+    try {
+      const updateGameData = await this.hometagModel.findByIdAndUpdate(
+        { _id: id },
+        updateHomeTagDto,
+        { new: true }
+      );
+      return responseObj(HttpStatus.OK, SUCCESS, updateGameData);
+    } catch (error) {
+      const { message, status } = error;
+      throw new HttpException(message, status);
+    }
+  }
+
+  ///// get home tags///
+  async getHomeTags() {
+    try {
+      const allHometags = await this.hometagModel
+        .find()
+        .sort({ createdAt: -1 });
+
+      return responseGetObj(HttpStatus.OK, SUCCESS, allHometags, 1);
     } catch (error) {
       const { message, status } = error;
       throw new HttpException(message, status);

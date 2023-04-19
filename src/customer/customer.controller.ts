@@ -64,4 +64,11 @@ export class CustomerController {
   getSetting() {
     return this.customerService.getSetting();
   }
+
+  //Get all home tags
+  @isPublicRoute()
+  @Get("/get-home-tags")
+  getHomeTags() {
+    return this.customerService.getHomeTags();
+  }
 }
