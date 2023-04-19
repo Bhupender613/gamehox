@@ -9,7 +9,7 @@ import { AuthModule } from "../auth/auth.module";
 import { Tag, TagSchema } from "./entities/tag.entity";
 import { Game, GameSchema } from "./entities/game.entity";
 import { Setting, SettingSchema } from "./entities/setting.entity";
-import { Hometag, HometagSchema } from "./entities/homeTag.entity";
+import { Hometag, HometagSchema } from "./entities/hometag.entity";
 
 @Module({
   imports: [
