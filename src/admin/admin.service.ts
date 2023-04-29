@@ -208,7 +208,7 @@ export class AdminService {
   // Update Tags in the Admin
   async tagUpdate(id: ObjectId, updateTagDto: UpdateTagDto) {
     try {
-      const { title } = updateTagDto;
+      const { title, addToHome } = updateTagDto;
       const duplicateTag = await this.tagModel
         .find({
           title,
@@ -222,6 +222,21 @@ export class AdminService {
           message: Tag_ALREADY_EXIST,
         });
       } else {
+        if (addToHome) {
+          const allHometags = await this.hometagModel.findOne({
+            _id: "644171f5e0cde4dcfa440f33",
+          });
+
+          let allTagsArray: any[] = allHometags.tags;
+          // console.log(typeof allTagsArray, allHometags);
+          allTagsArray.push(updateTagDto);
+          const updateTagData = await this.hometagModel.findByIdAndUpdate(
+            { _id: "644171f5e0cde4dcfa440f33" },
+            { tags: allTagsArray },
+            { new: true }
+          );
+          // console.log(allTagsArray, "in if condition", updateTagDto);
+        }
         const updateTagData = await this.tagModel.findByIdAndUpdate(
           { _id: id },
           updateTagDto,
